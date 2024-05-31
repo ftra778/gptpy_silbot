@@ -10,7 +10,7 @@ from google.cloud import texttospeech
 import os
 import subprocess
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'/home/user1/river-device-414122-47662d00a1d9.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'/home/user1/bold-meridian-424805-n4-e01381bda6ca.json'
 
 class ChatClient:
     """A command line chat client using select"""
@@ -77,13 +77,14 @@ class ChatClient:
         # The response's audio_content is binary.
         with open("output.mp3", "wb") as out:
             out.write(response.audio_content)
-            print('Audio content written to file "output.mp3"')
         
-        subprocess.run(["scp", "-P", "6622", "/home/user1/gptpy3/output.mp3", "silbot3@192.168.0.102:/home/silbot3/tts/"])
+        subprocess.run(["scp", "-P", "6622", "/home/user1/gptpy3/output.mp3", ("silbot3@" + self.host + ":/home/silbot3/tts/")])
 
 
     
-    def run(self):
+    def run(self):                       
+        # data = self.gpt.chat("Your name is silbot and you are a receptionist robot for The University of Auckland's CARES lab.")
+        # send(self.sock, data)
         """Chat client main loop"""
         while self.connected:
             try:
